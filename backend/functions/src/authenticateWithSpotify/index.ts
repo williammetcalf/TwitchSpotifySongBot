@@ -1,17 +1,17 @@
-import * as cors from "cors";
 import * as functions from "firebase-functions";
 
 import fetchSpotifyTokens from "./fetchSpotifyTokens";
 
-const authenticateWithSpotify = functions.https.onRequest((req, res) => {
+const authenticateWithSpotify = functions.https.onRequest(async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
 
-  cors({ origin: true })(req, res, async () => {
-    const spotifyCode = req.query.code as string;
+  const spotifyCode = req.query.code as string;
+  const tokens = await fetchSpotifyTokens(
+    spotifyCode,
+    `${req.header("origin")}/spotifyCallback`
+  );
 
-    const auth = fetchSpotifyTokens(spotifyCode);
-    res.send(auth);
-  });
+  res.send(tokens);
 });
 
 export default authenticateWithSpotify;
