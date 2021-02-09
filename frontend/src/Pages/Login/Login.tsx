@@ -1,8 +1,5 @@
-import firebase from "firebase/app";
-import React, { FC, useEffect, useMemo } from "react";
+import React, { FC } from "react";
 import { Redirect } from "react-router-dom";
-
-import { Button } from "@material-ui/core";
 
 import useAuthState from "../../hooks/useAuthState";
 import FinalizeAuth from "./FinalizeAuth";

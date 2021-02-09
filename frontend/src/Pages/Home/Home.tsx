@@ -1,19 +1,31 @@
+import firebase from "firebase/app";
 import React, { FC } from "react";
 
-import { Box, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
+import PageContainer from "../../components/PageContainer";
 import withAuthGuard from "../../components/withAuthGuard";
+import FirstTimeSetup from "./FirstTimeSetup";
+import useUserSettings from "./hooks/useUserSettings";
 
-export interface HomePageProps {}
+interface Props {
+  user: firebase.User;
+}
 
-const HomePage: FC<HomePageProps> = (props) => {
-  const {} = props;
+const HomePage: FC<Props> = (props) => {
+  const { user } = props;
+  const { displayName } = user;
+  const [data, loading] = useUserSettings(user);
+  const isNewUser = !loading && !data;
 
   return (
-    <Box>
-      <Typography>Home Page!</Typography>
-    </Box>
+    <PageContainer>
+      <Typography variant="h3">
+        Welcome <i style={{ fontSize: "0.90em" }}>{displayName}</i>
+      </Typography>
+      {isNewUser && <FirstTimeSetup />}
+    </PageContainer>
   );
 };
 
-export default withAuthGuard(HomePage);
+export default withAuthGuard<Props>(HomePage);

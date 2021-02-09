@@ -1,13 +1,8 @@
 import * as cors from "cors";
-import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 
 import fetchTwitchUserInfo from "./fetchTwitchUserInfo";
 import getFirestoreAuthToken from "./getFirestoreAuthToken";
-
-const key = require("../../service_account.json");
-const cert = admin.credential.cert(key);
-admin.initializeApp({ credential: cert });
 
 const authenticateWithTwitch = functions.https.onRequest((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
