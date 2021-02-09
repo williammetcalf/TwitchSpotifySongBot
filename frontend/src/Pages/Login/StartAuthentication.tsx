@@ -12,7 +12,7 @@ const StartAuthentication: FC = () => {
           const twitchUrl =
             `https://id.twitch.tv/oauth2/authorize?` +
             `client_id=${process.env.REACT_APP_TWITCH_CLIENT_ID}&` +
-            `redirect_uri=http://localhost:3000/auth?&` +
+            `redirect_uri=${window.location.origin}/auth?&` +
             `response_type=token+id_token&` +
             `scope=openid`;
           window.open(
