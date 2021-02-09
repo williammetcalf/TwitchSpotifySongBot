@@ -23,18 +23,25 @@ const FinalizeSpotifyAuth: FC<FinalizeSpotifyAuthProps> = (props) => {
 
   useEffect(() => {
     if (user && !loading) {
-      console.log("GOGOGO", user.uid);
       const spotifyTokensUrl = `${process.env.REACT_APP_API_URL}/authenticateWithSpotify?code=${search.code}`;
       fetch(spotifyTokensUrl)
         .then((res) => res.json())
         .then(async (tokens) => {
-          console.log(tokens);
           const { access_token, refresh_token } = tokens;
-          await firebase
+          const userSettingsRef = firebase
             .firestore()
             .collection("settings")
-            .doc(user.uid)
-            .set({ spotifyTokens: { access_token, refresh_token } });
+            .doc(user.uid);
+          await userSettingsRef.set({
+            spotifyTokens: { access_token, refresh_token },
+          });
+
+          const defaultSettings = await firebase
+            .firestore()
+            .collection("defaultSettings")
+            .doc("@@default")
+            .get();
+          await userSettingsRef.update({ ...defaultSettings.data() });
           window.close();
         });
     }
