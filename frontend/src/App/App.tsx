@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
 import useAuthState from "../hooks/useAuthState";
 import HomePage from "../Pages/Home";
@@ -12,6 +12,7 @@ function App() {
         <Switch>
           <Route path="/auth" exact component={LoginPage} />
           <Route path="/" exact component={HomePage} />
+          <Route component={() => <Redirect to="/" />} />
         </Switch>
       </BrowserRouter>
     </div>
