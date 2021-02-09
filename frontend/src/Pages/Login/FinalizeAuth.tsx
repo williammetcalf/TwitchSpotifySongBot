@@ -18,7 +18,6 @@ const FinalizeAuth: FC<Props> = (props) => {
         await firebase.auth().signInWithCustomToken(res.token);
         window.close();
       });
-    // window.close();
   }, [twitchToken]);
 
   return <CircularProgress />;
