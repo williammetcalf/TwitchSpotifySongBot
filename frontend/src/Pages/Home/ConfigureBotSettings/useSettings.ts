@@ -41,7 +41,7 @@ function useSettings(
             responseFormat: data.responseFormat,
           });
       });
-  }, [update, settings]);
+  }, [update]);
 
   const formDirty =
     state.command !== settings?.command ||
