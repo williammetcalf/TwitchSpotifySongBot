@@ -1,13 +1,18 @@
 import React, { FC } from "react";
 
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 
 import PageContainer from "../../components/PageContainer";
 
 const StartAuthentication: FC = () => {
   return (
     <PageContainer>
+      <Typography variant="h3" style={{ marginBottom: "0.5em" }}>
+        Login with Twitch to continue...
+      </Typography>
       <Button
+        color="primary"
+        variant="contained"
         onClick={() => {
           const twitchUrl =
             `https://id.twitch.tv/oauth2/authorize?` +
@@ -22,7 +27,7 @@ const StartAuthentication: FC = () => {
           );
         }}
       >
-        Authenticate
+        Login with Twitch
       </Button>
     </PageContainer>
   );

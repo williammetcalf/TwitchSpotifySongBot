@@ -29,7 +29,7 @@ const ConfigureBotSettings: FC<ConfigureBotSettingsProps> = (props) => {
       </Box>
       <Typography variant="h5">Configuration</Typography>
       <Divider />
-      <StyledGrid container spacing={2}>
+      <StyledGrid container spacing={2} style={{ marginTop: "1em" }}>
         <Grid item md={4} xs={12}>
           <Command
             command={settings.command}
